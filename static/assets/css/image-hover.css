@@ -1,0 +1,28 @@
+.website-container {
+    border: 2px solid #fff; /* White border around each container */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside the container */
+    margin: 10px 0; /* Margin between containers */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.website-container:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+.image-hover {
+    transition: transform 0.3s ease; /* Smooth transition for transform */
+}
+
+.image-hover:hover {
+    transform: translateY(-10px); /* Move the image up by 10 pixels */
+}
+
+.website-name {
+    margin-top: 10px; /* Space between the image and the website name */
+    font-size: 16px; /* Font size for the website name */
+    color: #fff; /* Text color (change as needed) */
+    text-align: center; /* Center the text */
+}
+

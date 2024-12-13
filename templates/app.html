@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block title %}
+    App
+{% endblock %}
+{% block content %}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-header">
+                    <h4 class="card-title">Pages</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Link</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for app in apps %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ app.name }}</td>
+                                    <td><img src="{{ app.image }}" width="50" alt=""></td>
+                                    <td>{{ app.link }}</td>
+                                    <td>
+                                        <!-- Edit Button -->
+                                        <button 
+                                            class="btn btn-info btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editModal{{ app.id }}">
+                                            Edit
+                                        </button>
+                                        <!-- Delete Form -->
+                                        <form 
+                                            action="{{ url_for('app_delete', id=app.id) }}" 
+                                            method="post" 
+                                            style="display:inline-block;">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editModal{{ app.id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form 
+                                                action="{{ url_for('app_edit', id=app.id) }}" 
+                                                method="post" 
+                                                enctype="multipart/form-data">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Page</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" 
+                                                            class="form-control" 
+                                                            name="name" 
+                                                            value="{{ app.name }}" 
+                                                            required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Link</label>
+                                                        <input type="text" 
+                                                            class="form-control" 
+                                                            name="link" 
+                                                            value="{{ app.link }}" 
+                                                            required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Image</label>
+                                                        <input type="file" 
+                                                            class="form-control" 
+                                                            name="image">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" 
+                                                        class="btn btn-secondary" 
+                                                        data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

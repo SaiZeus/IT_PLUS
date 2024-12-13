@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid">
+        <!-- /# card -->
+        <div class="col-lg-6">
+            <div class="card" style="width: 1150px;">
+                <div class="card-header">
+                    <h4 class="card-title">Pages</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>text</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for home in homes %}
+                                <tr>
+                                    <td>{{ loop.index }}</td> <!-- Row index -->
+                                    <td>{{ home.text }}</td>
+                                    <td>
+                                        <form action="{{ url_for('home_delete', id=home.id) }}" method="post" style="display: inline;">
+                                            <button type="submit" class="badge badge-danger" style="border: none;">Delete</button>
+                                        </form>
+                                        <a href="{{ url_for('home_edit', id=home.id) }}" class="badge badge-info" style="margin-left: 5px;">Edit</a>
+                                    </td> 
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
